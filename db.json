@@ -17,6 +17,24 @@
       "email": "vipinkumar@gmail.com",
       "password": "admingsge",
       "id": 3
+    },
+    {
+      "name": "Samay",
+      "email": "samay@gmail.com",
+      "password": "admin",
+      "id": 4
+    },
+    {
+      "name": "rahul",
+      "email": "rahul@gmail.com",
+      "password": "admin",
+      "id": 5
+    },
+    {
+      "name": "rahul",
+      "email": "rohan@gmail.com",
+      "password": "admin",
+      "id": 6
     }
   ],
   "tasks": []

@@ -10,11 +10,13 @@ import PageNotFound from './pages/PageNotFound';
 import Navigation from './components/Navigation';
 import Login from './components/Login';
 import Register from './components/Register';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
 
     <BrowserRouter>
+      <AuthProvider>
         <Navigation />
         <Routes>
           <Route path='/' element={<Navigate to="/login"/>}></Route>
@@ -29,6 +31,7 @@ function App() {
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='*' element={<PageNotFound />}></Route>
         </Routes>
+        </AuthProvider>
     </BrowserRouter>
   );
 }
