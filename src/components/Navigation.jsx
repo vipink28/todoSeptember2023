@@ -6,7 +6,7 @@ function Navigation(props) {
 
   const { user, logout } = useContext(AuthContext);
 
-
+  console.log(user)
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">

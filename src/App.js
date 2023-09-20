@@ -11,6 +11,7 @@ import Navigation from './components/Navigation';
 import Login from './components/Login';
 import Register from './components/Register';
 import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './protected route/ProtectedRoute';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
           </Route>
 
           <Route path='/about' element={<About />}></Route>
-          <Route path='/task-list' element={<TaskList />}></Route>
+          <Route path='/task-list' element={<ProtectedRoute><TaskList /></ProtectedRoute>}></Route>
           <Route path='/create-task' element={<CreateTask />}></Route>
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='*' element={<PageNotFound />}></Route>

@@ -5,7 +5,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({children})=>{
 
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(null);
     const [message, setMessage] = useState();
     const navigate = useNavigate();
 
@@ -77,10 +77,28 @@ export const AuthProvider = ({children})=>{
         navigate("/");
     }
 
-    useEffect(()=>{
+    const validateUser = async(email)=>{
+        const response =await fetch(`http://localhost:5000/users?email=${email}`,{method: "GET"});
+        if(response.ok){    
+            const user =await response.json();
+            if(user.length > 0){
+                setUser(user);
+            }else{
+                navigate('/');
+                localStorage.removeItem("user");
+            }
+        }else{
+            console.error("something went wrong");
+        }
+    }
+
+    useEffect(()=>{        
         const local = localStorage.getItem("user");
-        const userObj = JSON.parse(local);
-        setUser(userObj);
+        if(user){
+            const userObj = JSON.parse(local);        
+            validateUser(userObj.email);
+        }
+        
       }, []);
 
     return (
