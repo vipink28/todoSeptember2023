@@ -8,7 +8,7 @@ function ProtectedRoute({children}) {
     console.log(user);
     useEffect(()=>{
         if(user){
-            setIsLoggedIn(true);            
+            setIsLoggedIn(true);
         }
     },[user]);
 

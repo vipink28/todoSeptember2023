@@ -78,11 +78,12 @@ export const AuthProvider = ({children})=>{
     }
 
     const validateUser = async(email)=>{
-        const response =await fetch(`http://localhost:5000/users?email=${email}`,{method: "GET"});
+
+        const response =await fetch(`http://localhost:5000/users/?email=${email}`,{method: "GET"});
         if(response.ok){    
             const user =await response.json();
             if(user.length > 0){
-                setUser(user);
+                setUser(user[0]);
             }else{
                 navigate('/');
                 localStorage.removeItem("user");
@@ -94,11 +95,11 @@ export const AuthProvider = ({children})=>{
 
     useEffect(()=>{        
         const local = localStorage.getItem("user");
-        if(user){
+   
+        if(local){
             const userObj = JSON.parse(local);        
             validateUser(userObj.email);
-        }
-        
+        }        
       }, []);
 
     return (
