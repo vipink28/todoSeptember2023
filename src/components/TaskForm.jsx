@@ -3,10 +3,11 @@ import TaskContext from '../context/TaskContext';
 import AuthContext from '../context/AuthContext';
 
 function TaskForm(props) {
+    const { isUpdate, data } = props;
     const { createTask } = useContext(TaskContext);
     const { message, setMessage, user } = useContext(AuthContext);
     const [formData, setFormData]=useState(null);
-
+    console.log(data);
     useEffect(()=>{
         setMessage("");
     }, [])
@@ -28,7 +29,8 @@ function TaskForm(props) {
     }
     return (
         <div className='p-3 w-50'>
-            <h2 className='fs-3 text-white'>Create Task</h2>
+            <h2 className='fs-3 text-white'>{isUpdate ? "Update Task":"Create Task"}</h2>
+
             <div className='card p-3'>
                 <form>
                     <div className='mb-3'>
@@ -37,7 +39,7 @@ function TaskForm(props) {
                     </div>
 
                     <div className='mb-3'>
-                        <label htmlFor="description">Title</label>
+                        <label htmlFor="description">Description</label>
                         <textarea className='form-control' name='description' id='description' onChange={handleChange}></textarea>
                     </div>
 
@@ -46,7 +48,13 @@ function TaskForm(props) {
                         <input type="datetime-local" name='duedate' id='duedate' className='form-control' onChange={handleChange}/>
                     </div>
                     <p>{message}</p>
+                    {
+                    isUpdate ? <>
+                    <button className='btn btn-primary me-2'>Update Task</button>
+                    <button className='btn btn-warning'>Cancel</button>
+                    </> :
                     <button className='btn btn-primary' onClick={submitForm}>Create Task</button>
+                    }
                 </form>
             </div>
         </div>

@@ -85,6 +85,22 @@
       "description": "Go to shopping for grocery",
       "duedate": "2023-09-30T14:13",
       "id": 6
+    },
+    {
+      "title": "Appointment",
+      "userid": 1,
+      "modifiedon": "Wed Sep 27 2023 09:38:33 GMT+0530 (India Standard Time)",
+      "description": "Appointment with new client",
+      "duedate": "2023-09-28T13:42",
+      "id": 7
+    },
+    {
+      "title": "Cleaning",
+      "userid": 1,
+      "modifiedon": "Wed Sep 27 2023 09:43:08 GMT+0530 (India Standard Time)",
+      "description": "Clean the house.",
+      "duedate": "2023-09-28T14:48",
+      "id": 8
     }
   ]
 }

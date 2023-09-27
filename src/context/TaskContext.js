@@ -20,7 +20,8 @@ export const TaskProvider = ({children})=>{
         }
         const response = await fetch(`http://localhost:5000/tasks`, config);
         if(response.status === 201){
-            setMessage("Task created Successfully")
+            setMessage("Task created Successfully");
+            getTasks();
         }else{
             setMessage("Something went wrong");
         }
