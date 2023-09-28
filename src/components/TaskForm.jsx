@@ -3,15 +3,26 @@ import TaskContext from '../context/TaskContext';
 import AuthContext from '../context/AuthContext';
 
 function TaskForm(props) {
+    const init = {
+        title: "",
+        description: "",
+        duedate: ""
+    }
+
     const { isUpdate, data } = props;
-    const { createTask } = useContext(TaskContext);
+    const { createTask, updateTask } = useContext(TaskContext);
     const { message, setMessage, user } = useContext(AuthContext);
-    const [formData, setFormData]=useState(null);
-    console.log(data);
+    const [formData, setFormData]=useState(init);
+    
     useEffect(()=>{
         setMessage("");
     }, [])
 
+    useEffect(()=>{
+        if(isUpdate){
+            setFormData(data);
+        }
+    }, [isUpdate])
 
     const handleChange = (e)=>{
         const { name, value } = e.target;
@@ -26,6 +37,12 @@ function TaskForm(props) {
     const submitForm=(e)=>{
         e.preventDefault();
         createTask(formData);
+        setFormData(init);
+    }
+
+    const submitUpdate=(e)=>{
+        e.preventDefault();
+        updateTask(formData);
     }
     return (
         <div className='p-3 w-50'>
@@ -35,22 +52,22 @@ function TaskForm(props) {
                 <form>
                     <div className='mb-3'>
                         <label htmlFor="title">Title</label>
-                        <input type="text" name='title' id='title' className='form-control' onChange={handleChange}/>
+                        <input type="text" name='title' id='title' className='form-control' value={formData.title} onChange={handleChange}/>
                     </div>
 
                     <div className='mb-3'>
                         <label htmlFor="description">Description</label>
-                        <textarea className='form-control' name='description' id='description' onChange={handleChange}></textarea>
+                        <textarea className='form-control' name='description' id='description' onChange={handleChange} value={formData.description}></textarea>
                     </div>
 
                     <div className='mb-3'>
                         <label htmlFor="duedate">Due Date</label>
-                        <input type="datetime-local" name='duedate' id='duedate' className='form-control' onChange={handleChange}/>
+                        <input type="datetime-local" name='duedate' id='duedate' className='form-control' onChange={handleChange} value={formData.duedate}/>
                     </div>
                     <p>{message}</p>
                     {
                     isUpdate ? <>
-                    <button className='btn btn-primary me-2'>Update Task</button>
+                    <button className='btn btn-primary me-2' onClick={submitUpdate}>Update Task</button>
                     <button className='btn btn-warning'>Cancel</button>
                     </> :
                     <button className='btn btn-primary' onClick={submitForm}>Create Task</button>

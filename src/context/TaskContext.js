@@ -22,6 +22,9 @@ export const TaskProvider = ({children})=>{
         if(response.status === 201){
             setMessage("Task created Successfully");
             getTasks();
+            setTimeout(()=>{
+                setMessage("");
+            }, 3000)
         }else{
             setMessage("Something went wrong");
         }
@@ -37,6 +40,26 @@ export const TaskProvider = ({children})=>{
         setLatestTask(latest);
     }
 
+    const updateTask=async(formData)=>{
+        const config = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        }
+        const response = await fetch(`http://localhost:5000/tasks/${formData.id}`, config);
+        if(response.ok){
+            setMessage("Task updated successfully");
+            getTasks();
+            setTimeout(()=>{
+                setMessage("");
+            }, 3000)
+        }else{
+            setMessage("Something went wrong");
+        }
+    }
+
     useEffect(()=>{
         if(user){
             getTasks();
@@ -48,7 +71,8 @@ export const TaskProvider = ({children})=>{
         createTask,
         latestTask,
         recentTasks,
-        allTasks
+        allTasks,
+        updateTask
     }}>
         {children}
     </TaskContext.Provider>
