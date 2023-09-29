@@ -27,3 +27,21 @@ body{
     width: 100%;
     max-width: 460px;
 }
+.task-id{
+    width: 10%;
+}
+.task-title{
+    width: 20%;
+}
+.task-desc{
+    width: 40%;
+}
+.task-duedate{
+    width: 15%;
+}
+.task-actions{
+    width: 15%;
+}
+.task-row{
+    background-color: #202938;
+}
