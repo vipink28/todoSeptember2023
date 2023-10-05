@@ -60,6 +60,16 @@ export const TaskProvider = ({children})=>{
         }
     }
 
+    const deleteTask = async(id)=>{
+        const response = await fetch(`http://localhost:5000/tasks/${id}`, {method:"DELETE"});
+        if(response.ok){
+            setMessage("User Deleted Successfully");
+            getTasks();
+        }else{
+            setMessage("Something went wrong");
+        }
+    }
+
     useEffect(()=>{
         if(user){
             getTasks();
@@ -72,7 +82,8 @@ export const TaskProvider = ({children})=>{
         latestTask,
         recentTasks,
         allTasks,
-        updateTask
+        updateTask,
+        deleteTask
     }}>
         {children}
     </TaskContext.Provider>

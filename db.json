@@ -71,14 +71,6 @@
       "id": 4
     },
     {
-      "title": "Meeting",
-      "userid": 1,
-      "modifiedon": "Tue Sep 26 2023 10:11:11 GMT+0530 (India Standard Time)",
-      "description": "Meeting with Elon Musk",
-      "duedate": "2023-09-29T14:13",
-      "id": 5
-    },
-    {
       "title": "Shopping",
       "userid": 1,
       "modifiedon": "Tue Sep 26 2023 10:16:06 GMT+0530 (India Standard Time)",

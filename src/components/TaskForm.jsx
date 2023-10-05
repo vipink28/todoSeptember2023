@@ -9,11 +9,10 @@ function TaskForm(props) {
         duedate: ""
     }
 
-    const { isUpdate, data, onCancel } = props;
+    const { isUpdate, data, onCancel, isPopup, closeBtn } = props;
     const { createTask, updateTask } = useContext(TaskContext);
     const { message, setMessage, user } = useContext(AuthContext);
     const [formData, setFormData]=useState(init);
-    
     useEffect(()=>{
         setMessage("");
     }, [])
@@ -24,12 +23,16 @@ function TaskForm(props) {
         }else{
             setFormData(init);
         }
-    }, [isUpdate])
+    }, [isUpdate, data])
 
 
     const submitCancel=(e)=>{
         e.preventDefault();
-        onCancel();
+        if(isPopup){
+            closeBtn.current.click();
+        }else{
+            onCancel();
+        }        
     }
 
     const handleChange = (e)=>{

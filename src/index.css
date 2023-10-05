@@ -45,3 +45,6 @@ body{
 .task-row{
     background-color: #202938;
 }
+.modal-dialog{
+    max-width: 900px;
+}
