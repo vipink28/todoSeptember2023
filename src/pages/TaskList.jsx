@@ -1,9 +1,9 @@
-import React, { useContext, useReducer } from 'react';
+import React, { useContext, useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TaskContext from '../context/TaskContext';
 import { dateFormat } from '../helper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faEye, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Popup from '../components/Popup';
 // import { faEye as eyeRegular } from '@fortawesome/free-regular-svg-icons';
 
@@ -19,13 +19,29 @@ const reducer=(state, action)=>{
 function TaskList(props) {
     const { allTasks } = useContext(TaskContext);
     const [state, dispatch]=useReducer(reducer, null);
+    const [searchText, setSearchText]=useState("");
+    const handleSearch = (e)=>{
+        const { value } = e.target;
+        setSearchText(value);
+    }
+
+    const filteredTasks = allTasks?.filter((item)=>{
+        return item.title.toLowerCase().indexOf(searchText.toLowerCase()) >= 0 
+    })
+
+
     return (
         <div className='container p-4 mt-5 bg-primary text-white'>
             <div className="d-flex">
                 <h3>Task List</h3>
                 <Link className='btn btn-info ms-auto' to="/create-task">Create Task</Link>
             </div>
-
+            <div className='py-2 search-bar'>
+                <span className='search-icon'>
+                    <FontAwesomeIcon color='#999999' icon={faSearch}/>
+                </span>
+                <input type="text" className='form-control' placeholder='search task' onChange={handleSearch} />
+            </div>
             <div className='task-header d-flex mb-3 px-4 py-3'>
                 <div className="task-id">Sr. No.</div>
                 <div className="task-title">Title</div>
@@ -34,7 +50,7 @@ function TaskList(props) {
                 <div className="task-actions">Actions</div>
             </div>
             {
-            allTasks?.map((task)=>{
+            filteredTasks?.map((task)=>{
                 return(
             <div key={task.id} className='task-row d-flex align-items-center mb-3 rounded-3 px-4 py-3'>
                 <div className="task-id px-2">{task.id}</div>

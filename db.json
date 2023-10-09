@@ -95,14 +95,6 @@
       "id": 8
     },
     {
-      "title": "Gym",
-      "description": "Go to gym",
-      "duedate": "2023-10-06T15:26",
-      "userid": 1,
-      "modifiedon": "Thu Sep 28 2023 10:21:48 GMT+0530 (India Standard Time)",
-      "id": 9
-    },
-    {
       "title": "Grocery",
       "description": "Grocery shopping for home",
       "duedate": "2023-09-30T16:23",

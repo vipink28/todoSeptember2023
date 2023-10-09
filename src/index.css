@@ -48,3 +48,16 @@ body{
 .modal-dialog{
     max-width: 900px;
 }
+
+.search-bar{
+    position: relative;
+}
+.search-icon{
+    position: absolute;
+    left: .5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.search-bar input{
+    padding-left: 30px;
+}

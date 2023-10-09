@@ -1,18 +1,26 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { dateFormat } from '../helper';
 import TaskForm from './TaskForm';
 import TaskContext from '../context/TaskContext';
+import AuthContext from '../context/AuthContext';
 
 function Popup(props) {
     const {type, data} = props;
     const closeBtn = useRef(null);
-    const {message, setMessage, deleteTask} = useContext(TaskContext);
-
+    const {deleteTask} = useContext(TaskContext);
+    const {message, setMessage} = useContext(AuthContext);
     const onDelete=()=>{
       if(data){
         deleteTask(data.id);
-      }      
+        setTimeout(()=>{
+          closeBtn.current.click();
+        }, 2000)
+      }
     }
+
+    useEffect(()=>{
+      setMessage("");
+    }, [])
 
     return (
 <div className="modal" tabIndex="-1" id='task-modal'>
@@ -37,7 +45,11 @@ function Popup(props) {
             <TaskForm isUpdate={true} data={data} isPopup={true} closeBtn={closeBtn}/>
         </div> :
         <div>
+          {
+            message !== "" ?
+          <p>{message}</p>:
           <p>Are you sure? You want to delete the task?</p>
+          }
           <div className='d-flex'>
               <button className='btn btn-danger ms-auto me-2' onClick={onDelete}>Yes</button>
               <button className='btn btn-warning' data-bs-dismiss="modal">No</button>
